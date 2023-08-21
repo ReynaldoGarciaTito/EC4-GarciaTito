@@ -1,0 +1,9 @@
+com/example/demo/InstrumentoRepository.class
+com/example/demo/HomeController.class
+com/example/demo/MusicoRepository.class
+com/example/demo/Instrumento.class
+com/example/demo/Musico.class
+com/example/demo/DatabaseLoader.class
+com/example/demo/DemoApplication.class
+com/example/demo/Banda.class
+com/example/demo/BandaRepository.class
