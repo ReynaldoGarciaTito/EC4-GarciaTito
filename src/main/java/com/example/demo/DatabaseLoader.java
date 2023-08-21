@@ -7,15 +7,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
+	private final AlumnoRepository repositoryAlumno;
 	private final InstrumentoRepository repositoryInstrumento;
 	private final MusicoRepository repositoryMusico;
 	private final BandaRepository repositoryBanda;
 
 	@Autowired
-	public DatabaseLoader(InstrumentoRepository repositoryInstrumento, MusicoRepository repositoryMusico, BandaRepository repositoryBanda) {
+	public DatabaseLoader(InstrumentoRepository repositoryInstrumento, MusicoRepository repositoryMusico, BandaRepository repositoryBanda, AlumnoRepository repositoryAlumno) {
 		this.repositoryInstrumento = repositoryInstrumento;
 		this.repositoryMusico = repositoryMusico;
 		this.repositoryBanda = repositoryBanda;
+		this.repositoryAlumno = repositoryAlumno;
 
 	}
 
@@ -33,5 +35,6 @@ public class DatabaseLoader implements CommandLineRunner {
 				new Banda("Aerosmith"));
 		this.repositoryBanda.save(
 				new Banda("Grupo 5"));
+		this.repositoryAlumno.save(new Alumno("Reynaldo", "Garcia", "5to"));
 	}
 }

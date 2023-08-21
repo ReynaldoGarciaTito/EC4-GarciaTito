@@ -1,0 +1,7 @@
+@server = https://special-waddle-5wppgjxr5vghvpvr-8080.app.github.dev/api
+
+@alumnos = {{server}}/alumnos
+
+###
+
+GET {{alumnos}}

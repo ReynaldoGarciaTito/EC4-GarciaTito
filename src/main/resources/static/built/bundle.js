@@ -41117,9 +41117,7 @@ var App = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, App);
     _this = _super.call(this, props);
     _this.state = {
-      instrumentos: [],
-      musicos: [],
-      bandas: []
+      instrumentos: []
     };
     return _this;
   }
@@ -41135,34 +41133,18 @@ var App = /*#__PURE__*/function (_React$Component) {
           instrumentos: response.entity._embedded.instrumentos
         });
       });
-      client({
-        method: 'GET',
-        path: '/api/musicos'
-      }).done(function (response) {
-        _this2.setState({
-          musicos: response.entity._embedded.musicos
-        });
-      });
-      client({
-        method: 'GET',
-        path: '/api/bandas'
-      }).done(function (response) {
-        _this2.setState({
-          bandas: response.entity._embedded.bandas
-        });
-      });
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Aplicaci\xF3n Demo"), /*#__PURE__*/React.createElement("div", {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("center", null, /*#__PURE__*/React.createElement("h1", null, "Aplicaci\xF3n Demo"), /*#__PURE__*/React.createElement("div", {
         style: {
           "width": "100%",
           "display": "flex"
         }
       }, /*#__PURE__*/React.createElement("div", {
         style: {
-          "width": "calc(100%/3)"
+          "width": "calc(100%/1)"
         }
       }, /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Instrumento",
@@ -41171,29 +41153,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         instrumentos: this.state.instrumentos
       }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Link, {
         to: "/nuevo-instrumento"
-      }, "Nuevo Instrumento")), /*#__PURE__*/React.createElement("div", {
-        style: {
-          "width": "calc(100%/3)"
-        }
-      }, /*#__PURE__*/React.createElement(Titulo, {
-        entidad: "M\xFAsico",
-        emoji: "\uD83C\uDFB6"
-      }), /*#__PURE__*/React.createElement(MusicoList, {
-        musicos: this.state.musicos
-      }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Link, {
-        to: "/nuevo-musico"
-      }, "Nuevo M\xFAsico")), /*#__PURE__*/React.createElement("div", {
-        style: {
-          "width": "calc(100%/3)"
-        }
-      }, /*#__PURE__*/React.createElement(Titulo, {
-        entidad: "Banda",
-        emoji: "\uD83E\uDD41"
-      }), /*#__PURE__*/React.createElement(BandaList, {
-        bandas: this.state.bandas
-      }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Link, {
-        to: "/nueva-banda"
-      }, "Nueva Banda"))));
+      }, "Nuevo Instrumento")))));
     }
   }]);
   return App;
@@ -41217,9 +41177,9 @@ var InstrumentoList = /*#__PURE__*/function (_React$Component2) {
           instrumento: instrumento
         });
       });
-      return /*#__PURE__*/React.createElement("table", {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("center", null, /*#__PURE__*/React.createElement("table", {
         border: "1"
-      }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("th", null, "Categoria"), /*#__PURE__*/React.createElement("th", null, "Descripcion"), /*#__PURE__*/React.createElement("th", null, "Acciones")), instrumentos));
+      }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("th", null, "Categoria"), /*#__PURE__*/React.createElement("th", null, "Descripcion"), /*#__PURE__*/React.createElement("th", null, "Acciones")), instrumentos))));
     }
   }]);
   return InstrumentoList;
