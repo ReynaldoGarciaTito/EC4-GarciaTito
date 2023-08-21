@@ -6,13 +6,16 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { alumnos: [] };
+        this.state = { alumnos: [], colegios: []};
     }
 
     componentDidMount() {
         client({ method: 'GET', path: '/api/alumnos' }).done(response => {
             this.setState({ alumnos: response.entity._embedded.alumnos });
-        })
+        });
+        client({ method: 'GET', path: '/api/colegios' }).done(response => {
+			this.setState({ colegios: response.entity._embedded.colegios });
+		});
     }
 
     render() {
@@ -20,15 +23,27 @@ class App extends React.Component {
             <>
                 <center>
                     <h1>EC4 - GARCIA TITO</h1>
-
-                    <div style={{ "width": "100%", "display": "flex" }}>
-                        <div style={{ "width": "calc(100%/1)" }} >
-                            <Titulo entidad="Alumno" emoji="🎸" />
-                            <AlumnosList alumnos={this.state.alumnos} />
-                            <br></br>
-                            <Link to="/nuevo-instrumento">Nuevo Alumno</Link>
+                    <div className='row'>
+                        <div style={{ "width": "100%", "display": "flex" }}>
+                            <div style={{ "width": "calc(100%/1)" }} >
+                                <Titulo entidad="Alumno" emoji="🏫" />
+                                <AlumnosList alumnos={this.state.alumnos} />
+                                <br></br>
+                                <Link to="/nuevo-alumno">Nuevo Alumno</Link>
+                            </div>
                         </div>
                     </div>
+                    <div className='row'>
+                        <div style={{ "width": "100%", "display": "flex" }}>
+                            <div style={{ "width": "calc(100%/1)" }} >
+                                <Titulo entidad="Colegio" emoji="👨‍🎓" />
+                                <ColegioList colegios={this.state.colegios} />
+                                <br></br>
+                                <Link to="/nuevo-colegio">Nuevo Colegio</Link>
+                            </div>
+                        </div>
+                    </div>
+
                 </center>
 
             </>
@@ -40,7 +55,7 @@ const Titulo = (props) => {
     return (
         <>
             <hr />
-            <h2>{props.emoji} . {props.entidad}</h2>
+            <h2>{props.emoji} - {props.entidad}</h2>
             <span>Listado de {props.entidad.toLowerCase()}</span>
             <hr />
         </>
@@ -73,10 +88,10 @@ class AlumnosList extends React.Component {
     }
 }
 
-class MusicoList extends React.Component {
+class ColegioList extends React.Component {
     render() {
-        const musicos = this.props.musicos.map(musico =>
-            <Musico key={musico._links.self.href} musico={musico} />
+        const colegios = this.props.colegios.map(colegio =>
+            <Colegio key={colegio._links.self.href} colegio={colegio} />
         );
         return (
             <table border="1">
@@ -85,31 +100,13 @@ class MusicoList extends React.Component {
                         <th>Nombre</th>
                         <th>Acciones</th>
                     </tr>
-                    {musicos}
+                    {colegios}
                 </tbody>
             </table>
         )
     }
 }
 
-class BandaList extends React.Component {
-    render() {
-        const bandas = this.props.bandas.map(banda =>
-            <Banda key={banda._links.self.href} banda={banda} />
-        );
-        return (
-            <table border="1">
-                <tbody>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Acciones</th>
-                    </tr>
-                    {bandas}
-                </tbody>
-            </table>
-        )
-    }
-}
 
 class Alumno extends React.Component {
     render() {
@@ -120,40 +117,27 @@ class Alumno extends React.Component {
                 <td>{this.props.alumno.apellido}</td>
                 <td>{this.props.alumno.grado}</td>
                 <td>
-                    <Link to={`/editar-instrumento/${id}`}>Editar</Link>
+                    <Link to={`/editar-alumno/${id}`}>Editar</Link>
                 </td>
             </tr>
         )
     }
 }
 
-class Musico extends React.Component {
+class Colegio extends React.Component {
     render() {
-        const id = this.props.musico._links.self.href.split("/").slice(-1);
+        const id = this.props.colegio._links.self.href.split("/").slice(-1);
         return (
             <tr>
-                <td>{this.props.musico.nombre}</td>
+                <td>{this.props.colegio.nombre}</td>
                 <td>
-                    <Link to={`/editar-musico/${id}`}>Editar</Link>
+                    <Link to={`/ver-colegio/${id}`}>Ver</Link>
                 </td>
             </tr>
         )
     }
 }
 
-class Banda extends React.Component {
-    render() {
-        const id = this.props.banda._links.self.href.split("/").slice(-1);
-        return (
-            <tr>
-                <td>{this.props.banda.nombre}</td>
-                <td>
-                    <Link to={`/editar-banda/${id}`}>Ver</Link>
-                </td>
-            </tr>
-        )
-    }
-}
 
 
 module.exports = App;

@@ -3,7 +3,7 @@ const client = require('../client');
 const { render, Link } = require("react-router-dom");
 const {useState} = require('react');
 
-function PageNuevaBanda() {
+function PageNuevoColegio() {
 
     const [nombre, setNombre] = useState("");
 
@@ -11,7 +11,7 @@ function PageNuevaBanda() {
         event.preventDefault();
         client({
             method: 'POST',
-            path: '/api/bandas',
+            path: '/api/colegios',
             entity: { nombre: nombre },
             headers: { 'Content-Type': 'application/json' }
         }).done( () => window.location = "/");
@@ -19,15 +19,15 @@ function PageNuevaBanda() {
 
     return (
         <>
-            <h2>Nueva Banda</h2>
+            <h2>Nuevo Colegio</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='nombre'>Nombre</label>
                 <input type="text" id="nombre" name="nombre" onChange={(e)=>setNombre(e.target.value)} />
-                <input type='submit' value="Nueva Banda"></input>
+                <input type='submit' value="Nuevo Colegio"></input>
             </form>
             <Link to="/">Volver</Link>
         </>
     )
 }
 
-module.exports = PageNuevaBanda;
+module.exports = PageNuevoColegio;
